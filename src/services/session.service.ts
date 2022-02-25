@@ -2,7 +2,7 @@ import SessionModel, { SessionDocument } from "../models/session.model";
 import { FilterQuery, UpdateQuery } from "mongoose";
 import { get } from "lodash";
 import { signJwt, verifyJwt } from "../utils/jwt.utils";
-import { findUser } from "./user.service";
+import { getUser } from "./user.service";
 import config from "config";
 
 export async function createSession(userId: string, userAgent: string) {
@@ -13,7 +13,7 @@ export async function createSession(userId: string, userAgent: string) {
   return session.toJSON();
 }
 
-export async function findSessions(query: FilterQuery<SessionDocument>) {
+export async function getSessions(query: FilterQuery<SessionDocument>) {
   return SessionModel.find(query).lean();
 }
 
@@ -37,7 +37,7 @@ export async function reIssueAccessToken({
 
   if (!session || !session.valid) return false;
 
-  const user = await findUser({ _id: session.user });
+  const user = await getUser({ _id: session.user });
 
   if (!user) return false;
 
