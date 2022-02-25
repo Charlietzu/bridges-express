@@ -1,4 +1,6 @@
-import DeliveryPersonnelModel from "../models/deliveryPersonnel.model";
+import DeliveryPersonnelModel, {
+  DeliveryPersonnelInput,
+} from "../models/deliveryPersonnel.model";
 import {
   DocumentDefinition,
   FilterQuery,
@@ -8,9 +10,7 @@ import {
 import { DeliveryPersonnelDocument } from "../models/deliveryPersonnel.model";
 
 export async function createDeliveryPersonnel(
-  personnelInput: DocumentDefinition<
-    Omit<DeliveryPersonnelDocument, "createdAt" | "updatedAt">
-  >
+  personnelInput: DeliveryPersonnelInput
 ) {
   return DeliveryPersonnelModel.create(personnelInput);
 }

@@ -4,11 +4,15 @@ import { customAlphabet } from "nanoid";
 
 const nanoId = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
 
-export interface DeliveryPersonnelDocument extends mongoose.Document {
-  deliveryPersonnelId: string;
+export interface DeliveryPersonnelInput {
   user: UserDocument["_id"];
   bridgeLinkRank: number;
   active: boolean;
+}
+
+export interface DeliveryPersonnelDocument
+  extends DeliveryPersonnelInput,
+    mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
