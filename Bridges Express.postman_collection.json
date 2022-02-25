@@ -34,17 +34,29 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Delivery Personnel",
+			"item": [
 				{
-					"name": "Create Session",
+					"name": "Create Delivery Personnel",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
-									"pm.environment.set(\"refreshToken\", jsonData.refreshToken);"
+									"console.log(jsonData);\r",
+									"pm.environment.set(\"deliveryPersonnelId\", jsonData.deliveryPersonnelId);\r",
+									"\r",
+									"const newAccessToken = responseHeaders['x-access-token']\r",
+									"\r",
+									"if(newAccessToken){\r",
+									"    console.log('Set new access token')\r",
+									"    pm.environment.set(\"accessToken\", newAccessToken);\r",
+									"}"
 								],
 								"type": "text/javascript"
 							}
@@ -55,7 +67,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Sam Porter\",\r\n    \"email\": \"sam@bridges.com\",\r\n    \"bridgeLinkRank\": 10,\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,18 +75,53 @@
 							}
 						},
 						"url": {
-							"raw": "{{uriLocal}}/api/sessions",
+							"raw": "{{uriLocal}}/api/delivery-personnels",
 							"host": [
 								"{{uriLocal}}"
 							],
 							"path": [
 								"api",
-								"sessions"
+								"delivery-personnels"
 							]
 						}
 					},
 					"response": []
 				},
+				{
+					"name": "Get Delivery Personnels",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uriLocal}}/api/delivery-personnels/{{deliveryPersonnelId}}",
+							"host": [
+								"{{uriLocal}}"
+							],
+							"path": [
+								"api",
+								"delivery-personnels",
+								"{{deliveryPersonnelId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session",
+			"item": [
 				{
 					"name": "Get Sessions",
 					"event": [
@@ -164,6 +211,46 @@
 								"type": "text"
 							}
 						],
+						"url": {
+							"raw": "{{uriLocal}}/api/sessions",
+							"host": [
+								"{{uriLocal}}"
+							],
+							"path": [
+								"api",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
+									"pm.environment.set(\"refreshToken\", jsonData.refreshToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{uriLocal}}/api/sessions",
 							"host": [
