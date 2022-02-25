@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import { UserDocument } from "./user.model";
 import { customAlphabet } from "nanoid";
 
-const nanoId = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
+const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10);
 
 export interface DeliveryPersonnelInput {
-  user: UserDocument["_id"];
+  name: string;
+  email: string;
   bridgeLinkRank: number;
   active: boolean;
 }
@@ -23,12 +23,10 @@ const deliveryPersonnelSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: () => `DP-${nanoId()}`,
+      default: () => `DP-${nanoid()}`,
     },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
     bridgeLinkRank: { type: Number, required: true },
     active: { type: Boolean, default: true },
   },

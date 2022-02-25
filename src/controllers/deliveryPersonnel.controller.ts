@@ -18,13 +18,7 @@ export async function createDeliveryPersonnelHandler(
   req: Request<{}, {}, CreateDeliveryPersonnelInput["body"]>,
   res: Response
 ) {
-  const userId = res.locals.user._id;
-  const body = req.body;
-  const deliveryPersonnel = await createDeliveryPersonnel({
-    ...body,
-    user: userId,
-  });
-
+  const deliveryPersonnel = await createDeliveryPersonnel(req.body);
   return res.send(deliveryPersonnel);
 }
 
@@ -32,8 +26,6 @@ export async function updateDeliveryPersonnelHandler(
   req: Request<UpdateDeliveryPersonnelInput["params"]>,
   res: Response
 ) {
-  const userId = res.locals.user._id;
-
   const deliveryPersonnelId = req.params.deliveryPersonnelId;
   const updateBody = req.body;
 
@@ -43,10 +35,6 @@ export async function updateDeliveryPersonnelHandler(
 
   if (!deliveryPersonnel) {
     return res.sendStatus(404);
-  }
-
-  if (String(deliveryPersonnel.user) !== userId) {
-    return res.sendStatus(403);
   }
 
   const updatedDeliveryPersonnel = await getAndUpdateDeliveryPersonnel(
@@ -64,6 +52,7 @@ export async function getDeliveryPersonnelHandler(
   req: Request<GetDeliveryPersonnelInput["params"]>,
   res: Response
 ) {
+  console.log(req);
   const deliveryPersonnelId = req.params.deliveryPersonnelId;
   const deliveryPersonnel = await getDeliveryPersonnel({
     deliveryPersonnelId,
@@ -78,7 +67,6 @@ export async function deleteDeliveryPersonnelHandler(
   req: Request<DeleteDeliveryPersonnelInput["params"]>,
   res: Response
 ) {
-  const userId = res.locals.user._id;
   const deliveryPersonnelId = req.params.deliveryPersonnelId;
 
   const deliveryPersonnel = await getDeliveryPersonnel({
@@ -86,8 +74,6 @@ export async function deleteDeliveryPersonnelHandler(
   });
 
   if (!deliveryPersonnel) return res.sendStatus(404);
-
-  if (String(deliveryPersonnel.user) !== userId) return res.sendStatus(403);
 
   await deleteDeliveryPersonnel({ deliveryPersonnelId });
 

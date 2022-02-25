@@ -1,18 +1,14 @@
 import DeliveryPersonnelModel, {
   DeliveryPersonnelInput,
 } from "../models/deliveryPersonnel.model";
-import {
-  DocumentDefinition,
-  FilterQuery,
-  QueryOptions,
-  UpdateQuery,
-} from "mongoose";
+import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
 import { DeliveryPersonnelDocument } from "../models/deliveryPersonnel.model";
 
 export async function createDeliveryPersonnel(
   personnelInput: DeliveryPersonnelInput
 ) {
-  return DeliveryPersonnelModel.create(personnelInput);
+  console.log("cheguei");
+  return await DeliveryPersonnelModel.create(personnelInput);
 }
 
 export async function getDeliveryPersonnel(

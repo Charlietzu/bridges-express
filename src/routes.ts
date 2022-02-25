@@ -9,6 +9,14 @@ import validateResource from "./middlewares/validateResource";
 import { createUserSchema } from "./schemas/user.schema";
 import { createSessionSchema } from "./schemas/session.schema";
 import requireUser from "./middlewares/requireUser";
+import {
+  createDeliveryPersonnelSchema,
+  getDeliveryPersonnelSchema,
+} from "./schemas/deliveryPersonnel.schema";
+import {
+  createDeliveryPersonnelHandler,
+  getDeliveryPersonnelHandler,
+} from "./controllers/deliveryPersonnel.controller";
 
 function routes(app: Express) {
   app.get("/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
@@ -21,6 +29,18 @@ function routes(app: Express) {
   app.get("/api/sessions", requireUser, getUserSessionsHandler);
 
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
+
+  app.post(
+    "/api/delivery-personnels",
+    validateResource(createDeliveryPersonnelSchema),
+    createDeliveryPersonnelHandler
+  );
+
+  app.get(
+    "/api/delivery-personnels/:deliveryPersonnelId",
+    validateResource(getDeliveryPersonnelSchema),
+    getDeliveryPersonnelHandler
+  );
 }
 
 export default routes;
