@@ -7,7 +7,6 @@ import { DeliveryPersonnelDocument } from "../models/deliveryPersonnel.model";
 export async function createDeliveryPersonnel(
   personnelInput: DeliveryPersonnelInput
 ) {
-  console.log("cheguei");
   return await DeliveryPersonnelModel.create(personnelInput);
 }
 
@@ -15,7 +14,7 @@ export async function getDeliveryPersonnel(
   query: FilterQuery<DeliveryPersonnelDocument>,
   options: QueryOptions = { lean: true }
 ) {
-  return DeliveryPersonnelModel.findOne(query, {}, options);
+  return await DeliveryPersonnelModel.findOne(query, {}, options);
 }
 
 export async function getAndUpdateDeliveryPersonnel(

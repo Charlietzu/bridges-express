@@ -52,7 +52,6 @@ export async function getDeliveryPersonnelHandler(
   req: Request<GetDeliveryPersonnelInput["params"]>,
   res: Response
 ) {
-  console.log(req);
   const deliveryPersonnelId = req.params.deliveryPersonnelId;
   const deliveryPersonnel = await getDeliveryPersonnel({
     deliveryPersonnelId,
