@@ -13,6 +13,7 @@ export interface DeliveryPersonnelInput {
 export interface DeliveryPersonnelDocument
   extends DeliveryPersonnelInput,
     mongoose.Document {
+  deliveryPersonnelId: string;
   createdAt: Date;
   updatedAt: Date;
 }
