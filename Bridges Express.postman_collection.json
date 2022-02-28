@@ -88,7 +88,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Delivery Personnels",
+					"name": "Get Delivery Personnel by Id",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -112,6 +112,135 @@
 								"api",
 								"delivery-personnels",
 								"{{deliveryPersonnelId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Delivery Personnel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const newAccessToken = responseHeaders['x-access-token']\r",
+									"\r",
+									"if(newAccessToken){\r",
+									"    console.log('Set new access token')\r",
+									"    pm.environment.set(\"accessToken\", newAccessToken);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Caio César\",\r\n    \"email\": \"caio@bridges.com\",\r\n    \"bridgeLinkRank\": 10,\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uriLocal}}/api/delivery-personnels/{{deliveryPersonnelId}}",
+							"host": [
+								"{{uriLocal}}"
+							],
+							"path": [
+								"api",
+								"delivery-personnels",
+								"{{deliveryPersonnelId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Delivery Personnel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const newAccessToken = responseHeaders['x-access-token']\r",
+									"\r",
+									"if(newAccessToken){\r",
+									"    console.log('Set new access token')\r",
+									"    pm.environment.set(\"accessToken\", newAccessToken);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{uriLocal}}/api/delivery-personnels/{{deliveryPersonnelId}}",
+							"host": [
+								"{{uriLocal}}"
+							],
+							"path": [
+								"api",
+								"delivery-personnels",
+								"{{deliveryPersonnelId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Delivery Personnels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uriLocal}}/api/delivery-personnels",
+							"host": [
+								"{{uriLocal}}"
+							],
+							"path": [
+								"api",
+								"delivery-personnels"
 							]
 						}
 					},
