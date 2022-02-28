@@ -22,11 +22,15 @@ export async function getAndUpdateDeliveryPersonnel(
   update: UpdateQuery<DeliveryPersonnelDocument>,
   options: QueryOptions
 ) {
-  return DeliveryPersonnelModel.findOneAndUpdate(query, update, options);
+  return await DeliveryPersonnelModel.findOneAndUpdate(query, update, options);
 }
 
 export async function deleteDeliveryPersonnel(
   query: FilterQuery<DeliveryPersonnelDocument>
 ) {
-  return DeliveryPersonnelModel.deleteOne(query);
+  return await DeliveryPersonnelModel.deleteOne(query);
+}
+
+export async function getAllDeliveryPersonnels() {
+  return await DeliveryPersonnelModel.find();
 }
