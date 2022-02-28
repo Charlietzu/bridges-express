@@ -17,7 +17,7 @@ describe("[Integration]", () => {
           const deliveryPersonnelId =
             DeliveryPersonnelMocks.deliveryPersonnelId;
           const { statusCode, body } = await supertest(app).get(
-            `/api/delivery-personnels/${DeliveryPersonnelMocks.deliveryPersonnelId}`
+            `/api/delivery-personnel/${DeliveryPersonnelMocks.deliveryPersonnelId}`
           );
 
           expect(statusCode).toBe(200);
@@ -34,7 +34,7 @@ describe("[Integration]", () => {
           const deliveryPersonnelId =
             DeliveryPersonnelMocks.deliveryPersonnelId;
           const { statusCode, body } = await supertest(app).get(
-            `/api/delivery-personnels/${DeliveryPersonnelMocks.deliveryPersonnelId}`
+            `/api/delivery-personnel/${DeliveryPersonnelMocks.deliveryPersonnelId}`
           );
 
           expect(statusCode).toBe(404);

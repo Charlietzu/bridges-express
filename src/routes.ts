@@ -41,27 +41,27 @@ function routes(app: Express) {
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
   app.post(
-    "/api/delivery-personnels",
+    "/api/delivery-personnel",
     [requireUser, validateResource(createDeliveryPersonnelSchema)],
     createDeliveryPersonnelHandler
   );
 
   app.get(
-    "/api/delivery-personnels/:deliveryPersonnelId",
+    "/api/delivery-personnel/:deliveryPersonnelId",
     validateResource(getDeliveryPersonnelSchema),
     getDeliveryPersonnelHandler
   );
 
-  app.get("/api/delivery-personnels", getAllDeliveryPersonnelsHandler);
+  app.get("/api/delivery-personnel", getAllDeliveryPersonnelsHandler);
 
   app.put(
-    "/api/delivery-personnels/:deliveryPersonnelId",
+    "/api/delivery-personnel/:deliveryPersonnelId",
     [requireUser, validateResource(updateDeliveryPersonnelSchema)],
     updateDeliveryPersonnelHandler
   );
 
   app.delete(
-    "/api/delivery-personnels/:deliveryPersonnelId",
+    "/api/delivery-personnel/:deliveryPersonnelId",
     validateResource(deleteDeliveryPersonnelSchema),
     deleteDeliveryPersonnelHandler
   );

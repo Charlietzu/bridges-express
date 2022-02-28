@@ -44,5 +44,8 @@ describe("[Unit]", () => {
         });
       });
     });
+    describe("[Get All Delivery Personnel", () => {
+      describe("[Given that there exists one or more delivery personnel]", () => {});
+    });
   });
 });
