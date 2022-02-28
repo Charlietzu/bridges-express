@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "aee95791-6f0f-4e0c-bfe4-dca7ff2f1c7b",
-		"name": "Bridges Express",
+		"name": "bridges-express",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -51,7 +51,7 @@
 									"console.log(jsonData);\r",
 									"pm.environment.set(\"deliveryPersonnelId\", jsonData.deliveryPersonnelId);\r",
 									"\r",
-									"const newAccessToken = responseHeaders['x-access-token']\r",
+									"const newAccessToken = responseHeaders['x-access-token'];\r",
 									"\r",
 									"if(newAccessToken){\r",
 									"    console.log('Set new access token')\r",
@@ -63,8 +63,24 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"Sam Porter\",\r\n    \"email\": \"sam@bridges.com\",\r\n    \"bridgeLinkRank\": 10,\r\n    \"active\": true\r\n}",
