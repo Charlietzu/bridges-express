@@ -42,7 +42,7 @@ function routes(app: Express) {
 
   app.post(
     "/api/delivery-personnels",
-    validateResource(createDeliveryPersonnelSchema),
+    [requireUser, validateResource(createDeliveryPersonnelSchema)],
     createDeliveryPersonnelHandler
   );
 
@@ -56,7 +56,7 @@ function routes(app: Express) {
 
   app.put(
     "/api/delivery-personnels/:deliveryPersonnelId",
-    validateResource(updateDeliveryPersonnelSchema),
+    [requireUser, validateResource(updateDeliveryPersonnelSchema)],
     updateDeliveryPersonnelHandler
   );
 
