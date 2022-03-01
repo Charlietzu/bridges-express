@@ -1,0 +1,15 @@
+{
+  "serviceName": "bridges-express",
+  "containers": {
+    "bridges-express-container": {
+      "image": ":bridges-express.latest.1",
+      "ports": {
+        "1337": "HTTP"
+      }
+    }
+  },
+  "publicEndpoint": {
+    "containerName": "bridges-express-container",
+    "containerPort": 1337
+  }
+}
