@@ -74,7 +74,8 @@ export async function deleteDeliveryPersonnelHandler(
 
   if (!deliveryPersonnel) return res.sendStatus(404);
 
-  await deleteDeliveryPersonnel({ deliveryPersonnelId });
+  const test = await deleteDeliveryPersonnel({ deliveryPersonnelId });
+  console.log(test);
 
   return res.sendStatus(200);
 }
@@ -84,9 +85,7 @@ export async function getAllDeliveryPersonnelHandler(
   res: Response
 ) {
   const deliveryPersonnel = await getAllDeliveryPersonnel();
-  deliveryPersonnel.forEach((personnel) => {
-    console.log(personnel.deliveryPersonnelId);
-  });
+
   if (!deliveryPersonnel) return res.sendStatus(404);
 
   return res.send(deliveryPersonnel);

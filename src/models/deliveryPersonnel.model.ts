@@ -10,18 +10,12 @@ export interface DeliveryPersonnelInput {
 export interface DeliveryPersonnelDocument
   extends DeliveryPersonnelInput,
     mongoose.Document {
-  deliveryPersonnelId: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
 const deliveryPersonnelSchema = new mongoose.Schema(
   {
-    deliveryPersonnelId: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     name: { type: String, required: true },
     email: { type: String, required: true },
     bridgeLinkRank: { type: Number, required: true },

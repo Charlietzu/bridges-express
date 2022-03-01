@@ -74,5 +74,126 @@ describe("[Unit]", () => {
         });
       });
     });
+
+    describe("[Create Delivery Personnel]", () => {
+      describe("[Given that the payload is correct", () => {
+        it("Should return the created delivery personnel", async () => {
+          // Arrange
+          const createMock = jest
+            .spyOn(DeliveryPersonnelModel, "create")
+            .mockResolvedValue(
+              DeliveryPersonnelMocks.deliveryPersonnelMock1 as never
+            );
+          const personnelInput = DeliveryPersonnelMocks.deliveryPersonnelInput1;
+
+          // Act
+          const ret = await DeliveryPersonnelService.createDeliveryPersonnel(
+            personnelInput
+          );
+
+          // Assert
+          expect(createMock).toHaveBeenCalledTimes(1);
+          expect(ret).toEqual(DeliveryPersonnelMocks.deliveryPersonnelMock1);
+        });
+      });
+
+      describe("[Given that the payload is NOT correct", () => {
+        it("Should return null", async () => {
+          // Arrange
+          const createMock = jest
+            .spyOn(DeliveryPersonnelModel, "create")
+            .mockResolvedValue(null as never);
+          const personnelInput = DeliveryPersonnelMocks.deliveryPersonnelInput1;
+          personnelInput.email = "";
+
+          // Act
+          const ret = await DeliveryPersonnelService.createDeliveryPersonnel(
+            personnelInput
+          );
+
+          // Assert
+          expect(createMock).toHaveBeenCalledTimes(1);
+          expect(ret).toBeNull();
+        });
+      });
+    });
+
+    describe("[Update Delivery Personnel]", () => {
+      describe("[Given that the delivery personnel exists AND the payload is correct]", () => {
+        it("Should return the created object", async () => {
+          // Arrange
+          const findOneAndUpdateMock = jest
+            .spyOn(DeliveryPersonnelModel, "findOneAndUpdate")
+            .mockResolvedValue(
+              DeliveryPersonnelMocks.deliveryPersonnelMock1 as never
+            );
+          const personnelId = DeliveryPersonnelMocks.deliveryPersonnelId1;
+          const personnelInput = DeliveryPersonnelMocks.deliveryPersonnelInput1;
+
+          // Act
+          const ret =
+            await DeliveryPersonnelService.getAndUpdateDeliveryPersonnel(
+              { personnelId },
+              personnelInput,
+              { new: true }
+            );
+
+          // Assert
+          expect(findOneAndUpdateMock).toHaveBeenCalledTimes(1);
+          expect(ret).toEqual(DeliveryPersonnelMocks.deliveryPersonnelMock1);
+        });
+      });
+
+      describe("[Given that the delivery personnel exists BUT the payload is NOT correct]", () => {
+        it("Should return null", async () => {
+          // Arrange
+          const findOneAndUpdateMock = jest
+            .spyOn(DeliveryPersonnelModel, "findOneAndUpdate")
+            .mockResolvedValue(null as never);
+          const personnelId = DeliveryPersonnelMocks.deliveryPersonnelId1;
+          const personnelInput = DeliveryPersonnelMocks.deliveryPersonnelInput1;
+          personnelInput.email = "";
+
+          // Act
+          const ret =
+            await DeliveryPersonnelService.getAndUpdateDeliveryPersonnel(
+              { personnelId },
+              personnelInput,
+              { new: true }
+            );
+
+          // Assert
+          expect(findOneAndUpdateMock).toHaveBeenCalledTimes(1);
+          expect(ret).toBeNull();
+        });
+      });
+
+      describe("[Given that the payload is correct BUT the delivery personnel does NOT exists]", () => {
+        it("Should return null", async () => {
+          // Arrange
+          const findOneAndUpdateMock = jest
+            .spyOn(DeliveryPersonnelModel, "findOneAndUpdate")
+            .mockResolvedValue(null as never);
+          const personnelId = DeliveryPersonnelMocks.deliveryPersonnelId1;
+          const personnelInput = DeliveryPersonnelMocks.deliveryPersonnelInput1;
+
+          // Act
+          const ret =
+            await DeliveryPersonnelService.getAndUpdateDeliveryPersonnel(
+              { personnelId },
+              personnelInput,
+              { new: true }
+            );
+
+          // Assert
+          expect(findOneAndUpdateMock).toHaveBeenCalledTimes(1);
+          expect(ret).toBeNull();
+        });
+      });
+    });
+
+    describe("[Delete Delivery Personnel]", () => {
+      describe("[Given that the delivery personnel exists]", () => {});
+    });
   });
 });
