@@ -31,6 +31,6 @@ export async function deleteDeliveryPersonnel(
   return await DeliveryPersonnelModel.deleteOne(query);
 }
 
-export async function getAllDeliveryPersonnels() {
+export async function getAllDeliveryPersonnel() {
   return await DeliveryPersonnelModel.find();
 }

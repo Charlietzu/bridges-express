@@ -215,7 +215,7 @@
           "response": []
         },
         {
-          "name": "Get All Delivery Personnels",
+          "name": "Get All Delivery Personnel",
           "request": {
             "method": "GET",
             "header": [],

@@ -20,7 +20,7 @@ import {
 import {
   createDeliveryPersonnelHandler,
   deleteDeliveryPersonnelHandler,
-  getAllDeliveryPersonnelsHandler,
+  getAllDeliveryPersonnelHandler,
   getDeliveryPersonnelHandler,
   updateDeliveryPersonnelHandler,
 } from "./controllers/deliveryPersonnel.controller";
@@ -52,7 +52,7 @@ function routes(app: Express) {
     getDeliveryPersonnelHandler
   );
 
-  app.get("/api/delivery-personnel", getAllDeliveryPersonnelsHandler);
+  app.get("/api/delivery-personnel", getAllDeliveryPersonnelHandler);
 
   app.put(
     "/api/delivery-personnel/:deliveryPersonnelId",

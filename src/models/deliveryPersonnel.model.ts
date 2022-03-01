@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-import { customAlphabet } from "nanoid";
-
-const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10);
 
 export interface DeliveryPersonnelInput {
   name: string;
@@ -24,7 +21,6 @@ const deliveryPersonnelSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: () => `DP-${nanoid()}`,
     },
     name: { type: String, required: true },
     email: { type: String, required: true },

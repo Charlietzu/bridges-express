@@ -10,7 +10,7 @@ import {
 import {
   createDeliveryPersonnel,
   deleteDeliveryPersonnel,
-  getAllDeliveryPersonnels,
+  getAllDeliveryPersonnel,
   getAndUpdateDeliveryPersonnel,
   getDeliveryPersonnel,
 } from "../services/deliveryPersonnel.service";
@@ -68,7 +68,6 @@ export async function deleteDeliveryPersonnelHandler(
   res: Response
 ) {
   const deliveryPersonnelId = req.params.deliveryPersonnelId;
-
   const deliveryPersonnel = await getDeliveryPersonnel({
     deliveryPersonnelId,
   });
@@ -80,13 +79,15 @@ export async function deleteDeliveryPersonnelHandler(
   return res.sendStatus(200);
 }
 
-export async function getAllDeliveryPersonnelsHandler(
+export async function getAllDeliveryPersonnelHandler(
   req: Request,
   res: Response
 ) {
-  const deliveryPersonnels = await getAllDeliveryPersonnels();
+  const deliveryPersonnel = await getAllDeliveryPersonnel();
+  deliveryPersonnel.forEach((personnel) => {
+    console.log(personnel.deliveryPersonnelId);
+  });
+  if (!deliveryPersonnel) return res.sendStatus(404);
 
-  if (!deliveryPersonnels) return res.sendStatus(404);
-
-  return res.send(deliveryPersonnels);
+  return res.send(deliveryPersonnel);
 }
