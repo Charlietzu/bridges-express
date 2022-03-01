@@ -42,6 +42,7 @@ describe("[Unit]", () => {
         });
       });
     });
+
     describe("[Get All Delivery Personnel]", () => {
       describe("[Given that there exists one or more delivery personnel]", () => {
         it("Should return all the delivery personnel", async () => {
@@ -193,7 +194,43 @@ describe("[Unit]", () => {
     });
 
     describe("[Delete Delivery Personnel]", () => {
-      describe("[Given that the delivery personnel exists]", () => {});
+      describe("[Given that the delivery personnel exists]", () => {
+        it("Should return an object with the deleted row count", async () => {
+          // Arrange
+          const deleteOneMock = jest
+            .spyOn(DeliveryPersonnelModel, "deleteOne")
+            .mockResolvedValue({ deletedCount: 1 } as never);
+          const personnelId = DeliveryPersonnelMocks.deliveryPersonnelId1;
+
+          // Act
+          const ret = await DeliveryPersonnelService.deleteDeliveryPersonnel({
+            personnelId,
+          });
+
+          // Assert
+          expect(deleteOneMock).toHaveBeenCalledTimes(1);
+          expect(ret).toEqual({ deletedCount: 1 });
+        });
+      });
+
+      describe("[Given that the delivery personnel does NOT exists]", () => {
+        it("Should return an object with zero deleted rows count", async () => {
+          // Arrange
+          const deleteOneMock = jest
+            .spyOn(DeliveryPersonnelModel, "deleteOne")
+            .mockResolvedValue({ deletedCount: 0 } as never);
+          const personnelId = DeliveryPersonnelMocks.deliveryPersonnelId1;
+
+          // Act
+          const ret = await DeliveryPersonnelService.deleteDeliveryPersonnel({
+            personnelId,
+          });
+
+          // Assert
+          expect(deleteOneMock).toHaveBeenCalledTimes(1);
+          expect(ret).toEqual({ deletedCount: 0 });
+        });
+      });
     });
   });
 });
