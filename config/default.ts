@@ -1,7 +1,6 @@
 export default {
   port: 1337,
-  dbUri:
-    "mongodb+srv://Charlietzu:TyF1CnnvipGAj1y7@cluster0.yicq3.mongodb.net/bridges-express?retryWrites=true&w=majority",
+  dbUri: "mongodb://localhost:27017/bridges-express",
   saltWorkFactor: 10,
   accessTokenTtl: "15m",
   refreshTokenTtl: "1y",
