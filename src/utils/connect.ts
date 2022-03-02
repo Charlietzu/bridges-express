@@ -8,12 +8,8 @@ async function connect() {
     if (!process.env.DATABASE_URI) {
       logger.error("Database URI is not defined");
       process.exit(1);
-    }
-
-    if (process.env.NODE_ENV !== "production") {
-      dbUri = process.env.DATABASE_URI;
     } else {
-      //Logic to connect to production database
+      dbUri = process.env.DATABASE_URI;
     }
     await mongoose.connect(dbUri);
     logger.info("Connected to MongoDB");
