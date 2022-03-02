@@ -2,7 +2,7 @@
   "serviceName": "bridges-express",
   "containers": {
     "bridges-express-container": {
-      "image": ":bridges-express.latest.1",
+      "image": ":bridges-express.latest.2",
       "ports": {
         "1337": "HTTP"
       }
